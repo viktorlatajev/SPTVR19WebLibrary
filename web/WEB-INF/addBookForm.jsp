@@ -9,14 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Добавить книгу</title>
     </head>
     <body>
         <h1>Добавить книгу</h1>
         <form action="createBook" method="POST">
-            Название книги: <input type="text" name="name" value=""><br>
-            Год издания: <input type="text" name="author" value=""><br>
-            Автор книги: <input type="text" name="publishedYear" value=""><br>
+            Название книги: <input type="text" name="name" value="${name}"><br>
+            Год издания: <input type="text" name="publishedYear" value="${publishedYear}"><br>
+            Автор книги: <input type="text" name="author" value="${author}"><br>
             <input type="submit" name="submit" value="отправить"><br>
         </form>
     </body>

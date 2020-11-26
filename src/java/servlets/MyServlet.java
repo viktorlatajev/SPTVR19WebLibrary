@@ -5,13 +5,16 @@
  */
 package servlets;
 
+import entity.Book;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.BookFacade;
 
 /**
  *
@@ -22,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
         "/createBook"}
 )
 public class MyServlet extends HttpServlet {
+    @EJB
+    private BookFacade bookFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,7 +50,20 @@ public class MyServlet extends HttpServlet {
                 String name = request.getParameter("name");
                 String author = request.getParameter("author");
                 String publishedYear = request.getParameter("publishedYear");
-                request.setAttribute("info", "Данные из формы получены: название книги: "+name+" автор: "+author+" год издания: "+publishedYear);
+                if ("".equals(name) || name==null
+                    || "".equals(author) || author==null
+                    || "".equals(publishedYear) || publishedYear==null){
+                    request.setAttribute("info", "Заполните все поля формы");
+                    request.setAttribute("name", name);
+                    request.setAttribute("author", author);
+                    request.setAttribute("publishedYear", publishedYear);
+                    request.getRequestDispatcher("/WEB-INF/addBookForm.jsp").forward(request, response);
+                    break;
+                }
+                        
+                Book book = new Book(name, author, Integer.parseInt(publishedYear));
+                bookFacade.create(book);
+                request.setAttribute("info","добавлена книга: "+book.toString());
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 break;
         }
