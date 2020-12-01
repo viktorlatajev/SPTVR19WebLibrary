@@ -12,9 +12,12 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>My library</div>
+        <div>Our Library</div>
         <p>${info}</p>
         <br>
-        <a href="addBook">Добавить книгу</a>
+        <a href="addBook">Добавить новую книгу</a><br>
+        <a href="addReader">Добавить читателя</a><br>
+        <a href="listBooks">Список книг</a><br>
+        <a href="listReaders">Список читателей</a><br>
     </body>
 </html>
